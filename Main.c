@@ -18,15 +18,17 @@ int main() {
                 wait(NULL);
                 exit(0);
             }
-            printf("(server) ");
-            fgets(command, sizeof(command), stdin);
-            command[strlen(command) - 1] = '\0';  // remove newline character
+            else {
+                printf("(server) ");
+                fgets(command, sizeof(command), stdin);
+                command[strlen(command) - 1] = '\0';  // remove newline character
             
-            if (strcmp(command, "stop") == 0) {
-                signal[1].close = 1;
-                break;
-            } else {
-                printf("Unknown command, use \"help\" to get a list of commands.\n");
+                if (strcmp(command, "stop") == 0) {
+                    signal[1].close = 1;
+                    break;
+                } else {
+                    printf("Unknown command, use \"help\" to get a list of commands.\n");
+                }
             }
         }
     }
