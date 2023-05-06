@@ -1,7 +1,7 @@
 #include "../lib/Main.h"
 #include <stdio.h>
 
-void run_server(signals *signal) {
+void run_server() {
     keys keylist[3];
     keylist[0].key = "123";
     keylist[1].key = "467";
@@ -96,13 +96,6 @@ void run_server(signals *signal) {
             close(client_socket);
             exit(1);
         }
-
-        if (signal[0].close == 1) {
-            close(server_socket);
-            close(client_socket);
-            free(args);
-            signal[0].exit = 1;
-        } 
 
         thread_index = (thread_index + 1) % NUM_THREADS;
     }
