@@ -3,7 +3,7 @@
 int main() {
     signals signal[2];
     signal[0].exit = 0;
-    signal[1].close = 0;
+    signal[0].close = 0;
     pid_t pid = fork();
 
     if (pid == 0) {
@@ -13,6 +13,11 @@ int main() {
         // Parent process waits for input from user
         char command[100];
         while (1) {
+            if (signal[0].exit == 1) {
+                kill(pid, SIGTERM);
+                wait(NULL);
+                exit(0);
+            }
             printf("(server) ");
             fgets(command, sizeof(command), stdin);
             command[strlen(command) - 1] = '\0';  // remove newline character
