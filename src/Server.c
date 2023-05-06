@@ -6,7 +6,7 @@ void run_server(signals *signal) {
     keylist[1].key = "467";
     keylist[2].key = "890";
 
-    FILE* conf = fopen("../other/config.conf", "r");
+    FILE* conf = fopen("config.conf", "r");
     if (conf == NULL) {
         error_handle(0);
     }
