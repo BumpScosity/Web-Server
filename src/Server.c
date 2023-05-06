@@ -98,7 +98,7 @@ void run_server(signals *signal) {
 
         if (signal[0].close == 1) {
             close(server_socket);
-            closer(client_socket);
+            close(client_socket);
             free(args);
             signal[0].exit = 1;
         } 
