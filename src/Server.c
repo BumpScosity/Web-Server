@@ -96,10 +96,6 @@ void run_server(signals *signal) {
             exit(1);
         }
 
-        if (Close == 1) {
-            
-        }
-
         thread_index = (thread_index + 1) % NUM_THREADS;
     }
 
