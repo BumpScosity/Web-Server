@@ -25,7 +25,7 @@ void* handle_connection(void* arg) {
 
     if (strstr(buffer, "GET /") != NULL) {
         // Open the index.html file
-        FILE* file = fopen("index.html", "r");
+        FILE* file = fopen("HTML/index.html", "r");
         if (file == NULL) {
             // Return a 404 error
             const char* response = "HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\n\r\nFile not found\n";

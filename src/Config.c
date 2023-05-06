@@ -1,7 +1,7 @@
 #include "../lib/Main.h"
 
 int config(datalist *list) {
-    FILE *conf = fopen("config.conf", "r");
+    FILE *conf = fopen("config/config.conf", "r");
     if (conf == NULL) {
         return 1; // File not found
     }
