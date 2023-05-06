@@ -1,4 +1,4 @@
-#include "Main.h"
+#ifndef ERRORS_H
 
 const double Codes[] = {
     0, // File failed to open
@@ -17,5 +17,4 @@ const double Codes[] = {
     4.2 // Buffer not found
 };
 
-void error_handle(int ErrorCode);
-
+#endif // ERRORS_H

@@ -11,10 +11,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-#include "Errors.h"
-#include "Config.h"
-#include "Connections.h"
-#include "Connections.h"
 #include "Server.h"
 
 typedef struct {
@@ -42,5 +38,11 @@ typedef struct {
     int exit;
     int close;
 } signals;
+
+void* handle_connection(void* arg);
+void error_handle(int ErrorCode);
+int config(datalist *list);
+void run_server(signals *signal);
+
 
 #endif // MAIN_H
