@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
     else if (pid == 0) {
-        server(port);
+        run_server();
         exit(EXIT_SUCCESS);
     }
     else {
