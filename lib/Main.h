@@ -48,7 +48,7 @@ void* handle_connection(void* arg);
 void error_handle(int ErrorCode);
 int config(datalist *list);
 void run_server(signals signal[3], settings setting[3]);
-void input(signals signalp[3]);
+void input(signals signal[3]);
 
 
 #endif // MAIN_H
