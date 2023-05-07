@@ -1,5 +1,4 @@
 #include "../lib/Main.h"
-#include <stdio.h>
 
 void run_server() {
     printf("Ran1");
