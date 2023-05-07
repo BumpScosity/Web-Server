@@ -32,19 +32,17 @@ int main()
         exit(1);
     } else {
         // Parent process
-        close(fd[1]); // Close the write end of the pipe
-
-        read(fd[0], buffer, 1024); // Read the message from the pipe
-        printf("Received message from child process: %s\n", buffer);
-        close(fd[0]);  // Close read end of pipe
 
         char command[100];
         while (1) {
+        read(fd[0], buffer, 1024); // Read the message from the pipe
+        printf("Received message from child process: %s\n", buffer);
             printf("(server) ");
             fgets(command, sizeof(command), stdin);
             command[strlen(command) - 1] = '\0';  // remove newline character
             
             if (strcmp(command, "exit") == 0) {
+                close(fd[0]);  // Close read end of pipe
                 break;
             } else {
                 printf("Unknown command\n");
