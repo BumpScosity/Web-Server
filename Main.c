@@ -7,11 +7,12 @@ int main() {
 
     if (pid == 0) {
         // Child process runs the server
-        printf("Pid2: %d\n", pid);
+        printf("Pid3: %d\n", pid);
         run_server();
+        printf("Pid4: %d\n", pid);
     } else {
         // Parent process waits for input from user
-        printf("Pid3: %d\n", pid);
+        printf("Pid2: %d\n", pid);
         char command[100];
         while (1) {
             printf("Enter a command (stop to quit): ");
