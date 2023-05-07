@@ -1,4 +1,4 @@
-#include "/lib/Main.h"
+#include "lib/Main.h"
 
 int main() {
     pid_t pid = fork();
