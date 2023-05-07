@@ -5,7 +5,6 @@ void* handle_connection(void* arg) {
     datalist* list = args->list;
     keys* keylist = args->keylist;
     signals* signal = args->signal;
-    int* fd = args->fd;
     int PORT = list[0].port;
     int NUM_THREADS = list[1].threads;
     int BUFFER_SIZE = list[2].buffer;

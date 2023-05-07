@@ -44,7 +44,8 @@ typedef struct {
 void* handle_connection(void* arg);
 void error_handle(int ErrorCode);
 int config(datalist *list);
-void run_server(int fd[2], signals signal[10]);
+void run_server(signals signal[3]);
+void input(signals signalp[3]);
 
 
 #endif // MAIN_H

@@ -1,6 +1,6 @@
 #include "../lib/Main.h"
 
-void run_server(int fd[2], signals signal[10]) {
+void run_server(signals signal[3]) {
     keys keylist[3];
     keylist[0].key = "123";
     keylist[1].key = "467";
@@ -89,13 +89,23 @@ void run_server(int fd[2], signals signal[10]) {
         args->list = list;
         args->keylist = keylist;
         args->signal = signal;
-        args->fd = fd;
         if (pthread_create(&threads[thread_index], NULL, handle_connection, args) != 0) {
             printf("\033[31mFAILURE:\033[36m Failed to create thread to handle connection\n");
             free(args);
             close(server_socket);
             close(client_socket);
             exit(1);
+        }
+
+        if (signal[0].close == 1) {
+            free(args);
+            close(server_socket);
+            close(client_socket);
+            thread_index = 0;
+            for (int i = 0; i < NUM_THREADS; i++; thread_index++) {
+                pthread_cancel(&threads[thread_index])
+            }
+            signal[0].exit = 1;
         }
 
         thread_index = (thread_index + 1) % NUM_THREADS;
