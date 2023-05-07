@@ -1,6 +1,9 @@
 #include "lib/Main.h"
 
 int main() {
+    settings setting[3];
+    setting[0].log = 1;
+
     signals signal[3];
     signal[0].close = 0;
     signal[0].exit = 0;
@@ -11,7 +14,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    run_server(signal);
+    run_server(signal, setting);
 
     while (1) {
         if (signal[0].running == 0) {

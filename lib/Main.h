@@ -10,7 +10,10 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <sys/mman.h>
+
+typedef struct {
+    int log;
+} settings;
 
 typedef struct {
     int port;
@@ -33,7 +36,7 @@ typedef struct {
     datalist* list;
     keys* keylist;
     signals* signal;
-    int* fd;
+    settings* setting;
 } connection_args;
 
 typedef struct {
@@ -44,7 +47,7 @@ typedef struct {
 void* handle_connection(void* arg);
 void error_handle(int ErrorCode);
 int config(datalist *list);
-void run_server(signals signal[3]);
+void run_server(signals signal[3], settings setting[3]);
 void input(signals signalp[3]);
 
 

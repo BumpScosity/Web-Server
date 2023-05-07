@@ -89,6 +89,7 @@ void run_server(signals signal[3]) {
         args->list = list;
         args->keylist = keylist;
         args->signal = signal;
+        args->setting = setting;
         if (pthread_create(&threads[thread_index], NULL, handle_connection, args) != 0) {
             printf("\033[31mFAILURE:\033[36m Failed to create thread to handle connection\n");
             free(args);
