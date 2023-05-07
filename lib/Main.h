@@ -10,6 +10,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/mman.h>
 
 typedef struct {
     int port;
@@ -35,6 +36,7 @@ typedef struct {
 typedef struct {
     int exit;
     int close;
+    int running;
 } signals;
 
 void* handle_connection(void* arg);

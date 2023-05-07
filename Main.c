@@ -1,32 +1,11 @@
 #include "lib/Main.h"
 
-void child_process(int fd)
-{
-    char buf[1024];
-    int n;
-
-    // Read command from parent process
-    while ((n = read(fd, buf, sizeof(buf))) > 0) {
-        // Null terminate the command string
-        buf[n] = '\0';
-
-        // Execute the command function
-        if (strcmp(buf, "print_hello") == 0) {
-            printf("Hello from child process!\n");
-        } else if (strcmp(buf, "exit") == 0) {
-            break;
-        } else {
-            printf("Unknown command: %s\n", buf);
-        }
-    }
-
-    // Close the pipe and exit
-    close(fd);
-    exit(0);
-}
-
 int main()
-{
+{   
+    signals signal[1];
+    signal[0].close = 0;
+    signal[0].exit = 0;
+    signal[0].running = 0;
     int fd[2];
     pid_t pid;
 
@@ -43,10 +22,13 @@ int main()
         exit(1);
     } else if (pid == 0) {
         // Child process
+        int* child_var = mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+        signal[0].running = 1;
+        munmap(child_var, sizeof(int));
         close(fd[1]);  // Close write end of pipe
 
         // Run child process function
-        child_process(fd[0]);
+        run_server();
 
         // Should not reach here
         exit(1);
@@ -54,9 +36,18 @@ int main()
         // Parent process
         close(fd[0]);  // Close read end of pipe
 
-        // Send commands to child process
-        write(fd[1], "print_hello\n", strlen("print_hello\n"));
-        write(fd[1], "exit\n", strlen("exit\n"));
+        char command[100];
+        while (1) {
+            printf("(server) ");
+            fgets(command, sizeof(command), stdin);
+            command[strlen(command) - 1] = '\0';  // remove newline character
+            
+            if (strcmp(command, "exit") == 0) {
+                break;
+            } else {
+                printf("Unknown command\n");
+            }
+        }
 
         // Wait for child process to exit
         wait(NULL);
