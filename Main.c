@@ -32,12 +32,16 @@ int main() {
     }
 
     if (pid == 0) {
-        // Child process
+        const char* message = "Hello, parent process!";
+        write(pipefd[1], message, strlen(message) + 1); // Write the message to the pipe
         close(fd[1]); // Close the write end of the pipe
         child_process(fd[0], fd[1]);
     } else {
         // Parent process
-        close(fd[0]); // Close the read end of the pipe
+        read(pipefd[0], buffer, BUFFER_SIZE); // Read the message from the pipe
+        printf("Received message from child process: %s\n", buffer);
+
+        close(pipefd[0]); // Close the read end of the pipe
 
         // Send the function pointer to the child process through the pipe
         void (*func)(void) = &run_server;
