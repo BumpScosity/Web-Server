@@ -7,6 +7,7 @@ int main()
     signal[0].close = 0;
     signal[0].exit = 0;
     signal[0].running = 0;
+    char buffer[1024];
     int fd[2];
     pid_t pid;
 
@@ -23,8 +24,12 @@ int main()
         exit(1);
     } else if (pid == 0) {
         // Child process
-        printf("Did this work?");
-        close(fd[1]);  // Close write end of pipe
+        close(fd[0]); // Close the read end of the pipe
+
+        const char* message = "Hello, parent process!";
+        write(fd[1], message, strlen(message) + 1); // Write the message to the pipe
+
+        close(fd[1]); // Close the write end of the pipe
 
         // Run child process function
         run_server();
@@ -33,6 +38,10 @@ int main()
         exit(1);
     } else {
         // Parent process
+        close(fd[1]); // Close the write end of the pipe
+
+        read(fd[0], buffer, 1024); // Read the message from the pipe
+        printf("Received message from child process: %s\n", buffer);
         close(fd[0]);  // Close read end of pipe
 
         char command[100];
@@ -50,9 +59,6 @@ int main()
 
         // Wait for child process to exit
         wait(NULL);
-
-        // Close write end of pipe
-        close(fd[1]);
 
         exit(0);
     }
