@@ -1,4 +1,5 @@
 #include "lib/Main.h"
+#include <stdio.h>
 
 int main()
 {   
@@ -22,9 +23,7 @@ int main()
         exit(1);
     } else if (pid == 0) {
         // Child process
-        int* child_var = mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-        signal[0].running = 1;
-        munmap(child_var, sizeof(int));
+        printf("Did this work?");
         close(fd[1]);  // Close write end of pipe
 
         // Run child process function
