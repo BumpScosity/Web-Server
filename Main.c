@@ -1,32 +1,33 @@
 #include "lib/Main.h"
-#include <stdio.h>
 
-int main() {
-    pid_t pid = fork();
-    printf("Pid1: %d\n", pid);
+int main(int argc, char** argv) {
+    int port = 8080;
+    pid_t pid;
 
-    if (pid == 0) {
-        // Child process runs the server
-        printf("Pid3: %d\n", pid);
-        run_server();
-        printf("Pid4: %d\n", pid);
-    } else {
-        // Parent process waits for input from user
-        printf("Pid2: %d\n", pid);
-        char command[100];
+    if ((pid = fork()) < 0) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid == 0) {
+        server(port);
+        exit(EXIT_SUCCESS);
+    }
+    else {
+        printf("Server running on port %d\n", port);
         while (1) {
-            printf("Enter a command (stop to quit): ");
-            fgets(command, sizeof(command), stdin);
-            command[strlen(command) - 1] = '\0';  // remove newline character
-            
-            if (strcmp(command, "stop") == 0) {
-                kill(pid, SIGTERM);  // send termination signal to child process
-                break;
-            } else {
+            char input[256];
+            printf("> ");
+            fflush(stdout);
+            fgets(input, sizeof(input), stdin);
+            if (strcmp(input, "stop\n") == 0) {
+                kill(pid, SIGTERM);
+                waitpid(pid, NULL, 0);
+                printf("Server stopped\n");
+                exit(EXIT_SUCCESS);
+            }
+            else {
                 printf("Unknown command\n");
             }
         }
     }
-
-    return 0;
 }
