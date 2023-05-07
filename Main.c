@@ -1,27 +1,24 @@
-#include "lib/Main.h"
+#include "/lib/Main.h"
 
 int main() {
-    pid_t pid;
+    pid_t pid = fork();
 
-    pid = fork();
-    if (pid == -1) {
-        // Error forking
-        printf("Error: Could not fork.\n");
-        exit(1);
-    }
-    else if (pid == 0) {
-        // Child process
+    if (pid == 0) {
+        // Child process runs the server
         run_server();
-        exit(0);
     } else {
-        // Parent process
+        // Parent process waits for input from user
+        char command[100];
         while (1) {
-            char command[100];
-            printf("(server) ");
-            scanf("%99s", command);
+            printf("Enter a command (stop to quit): ");
+            fgets(command, sizeof(command), stdin);
+            command[strlen(command) - 1] = '\0';  // remove newline character
+            
             if (strcmp(command, "stop") == 0) {
-                exit(1);
+                kill(pid, SIGTERM);  // send termination signal to child process
                 break;
+            } else {
+                printf("Unknown command\n");
             }
         }
     }
