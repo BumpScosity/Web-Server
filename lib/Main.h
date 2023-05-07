@@ -42,7 +42,7 @@ typedef struct {
 void* handle_connection(void* arg);
 void error_handle(int ErrorCode);
 int config(datalist *list);
-void run_server();
+void run_server(int fd[2], signals signal[10]);
 
 
 #endif // MAIN_H

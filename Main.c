@@ -3,7 +3,7 @@
 
 int main()
 {   
-    signals signal[1];
+    signals signal[10];
     signal[0].close = 0;
     signal[0].exit = 0;
     signal[0].running = 0;
@@ -26,7 +26,7 @@ int main()
         // Child process
         close(fd[0]); // Close the read end of the pipe
         // Run child process function
-        run_server();
+        run_server(fd, signal);
 
         const char* message = "Hello, parent process!";
         write(fd[1], message, strlen(message) + 1); // Write the message to the pipe

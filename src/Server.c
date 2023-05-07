@@ -1,6 +1,6 @@
 #include "../lib/Main.h"
 
-void run_server() {
+void run_server(int fd[2], signals signal[10]) {
     printf("Ran1");
     keys keylist[3];
     keylist[0].key = "123";
