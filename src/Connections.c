@@ -4,6 +4,8 @@ void* handle_connection(void* arg) {
     connection_args* args = (connection_args*) arg;
     datalist* list = args->list;
     keys* keylist = args->keylist;
+    signals* signal = args->signal;
+    int* fd = args->fd;
     int PORT = list[0].port;
     int NUM_THREADS = list[1].threads;
     int BUFFER_SIZE = list[2].buffer;
@@ -21,7 +23,9 @@ void* handle_connection(void* arg) {
     buffer[n] = '\0';
 
     // Print the request
-    printf("%s", buffer);
+    write(fd[1], buffer, strlen(buffer) + 1); // Write the message to the pipe
+
+    close(fd[1]); // Close the write end of the pipe
 
     if (strstr(buffer, "GET /") != NULL) {
         // Open the index.html file

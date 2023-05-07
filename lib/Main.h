@@ -23,21 +23,23 @@ typedef struct {
 } keys;
 
 typedef struct {
+    int exit;
+    int close;
+    int running;
+} signals;
+
+typedef struct {
     int socket;
     datalist* list;
     keys* keylist;
+    signals* signal;
+    int* fd;
 } connection_args;
 
 typedef struct {
     datalist *list;
     connection_args *data;
 } thread_args;
-
-typedef struct {
-    int exit;
-    int close;
-    int running;
-} signals;
 
 void* handle_connection(void* arg);
 void error_handle(int ErrorCode);
