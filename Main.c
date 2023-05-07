@@ -29,7 +29,7 @@ int main() {
     } else { // Parent process
         close(pipefd[1]); // Close the write end of the pipe
 
-        read(pipefd[0], buffer, BUFFER_SIZE); // Read the message from the pipe
+        read(pipefd[0], buffer, 1024); // Read the message from the pipe
         printf("Received message from child process: %s\n", buffer);
 
         close(pipefd[0]); // Close the read end of the pipe
