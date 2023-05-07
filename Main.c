@@ -25,14 +25,13 @@ int main()
     } else if (pid == 0) {
         // Child process
         close(fd[0]); // Close the read end of the pipe
+        // Run child process function
+        run_server();
 
         const char* message = "Hello, parent process!";
         write(fd[1], message, strlen(message) + 1); // Write the message to the pipe
 
         close(fd[1]); // Close the write end of the pipe
-
-        // Run child process function
-        run_server();
 
         // Should not reach here
         exit(1);
