@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 void run_server() {
+    printf("Ran1");
     keys keylist[3];
     keylist[0].key = "123";
     keylist[1].key = "467";

@@ -1,13 +1,17 @@
 #include "lib/Main.h"
+#include <stdio.h>
 
 int main() {
     pid_t pid = fork();
+    printf("Pid1: %d\n", pid);
 
     if (pid == 0) {
         // Child process runs the server
+        printf("Pid2: %d\n", pid);
         run_server();
     } else {
         // Parent process waits for input from user
+        printf("Pid3: %d\n", pid);
         char command[100];
         while (1) {
             printf("Enter a command (stop to quit): ");
