@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
         // This is the parent process
 
         // Wait for a command
-        while (true) {
+        while (1) {
             printf("Enter a command: ");
             char command[100];
             if (fgets(command, sizeof(command), stdin) == NULL) {
