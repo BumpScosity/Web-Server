@@ -1,5 +1,5 @@
 CC = gcc
-FLAGS = -pthread
+FLAGS = -g -pthread
 
 SRC = src
 OBJ = obj
