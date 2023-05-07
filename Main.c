@@ -28,11 +28,6 @@ int main()
         // Run child process function
         run_server(fd, signal);
 
-        const char* message = "Hello, parent process!";
-        write(fd[1], message, strlen(message) + 1); // Write the message to the pipe
-
-        close(fd[1]); // Close the write end of the pipe
-
         // Should not reach here
         exit(1);
     } else {

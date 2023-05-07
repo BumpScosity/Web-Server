@@ -1,7 +1,10 @@
 #include "../lib/Main.h"
 
 void run_server(int fd[2], signals signal[10]) {
-    printf("Ran1");
+    const char* message = "Hello, parent process!";
+    write(fd[1], message, strlen(message) + 1); // Write the message to the pipe
+
+    close(fd[1]); // Close the write end of the pipe
     keys keylist[3];
     keylist[0].key = "123";
     keylist[1].key = "467";
