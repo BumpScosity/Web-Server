@@ -11,44 +11,17 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-typedef struct {
-    int log;
-} settings;
-
-typedef struct {
-    int port;
-    int threads;
-    int buffer;
-} datalist;
-
-typedef struct {
-    char *key;
-} keys;
+#define SHM_SIZE sizeof(struct shared_data)
 
 typedef struct {
     int exit;
-    int close;
+    int start;
+    int stop;
     int running;
-} signals;
+} data;
 
-typedef struct {
-    int socket;
-    datalist* list;
-    keys* keylist;
-    signals* signal;
-    settings* setting;
-} connection_args;
-
-typedef struct {
-    datalist *list;
-    connection_args *data;
-} thread_args;
-
-void* handle_connection(void* arg);
-void error_handle(int ErrorCode);
-int config(datalist *list);
-void run_server(signals signal[3], settings setting[3]);
-void input(signals signal[3]);
+void input(data *data, char command[1024]);
+void run_server(data data);
 
 
 #endif // MAIN_H

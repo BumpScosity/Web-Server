@@ -1,21 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/mman.h>
-#include <sys/wait.h>
-
-#define SHM_SIZE sizeof(struct shared_data)
-
-struct shared_data {
-    int exit;
-};
+#include "lib/Main.h"
 
 int main()
 {
     int shm_fd;
     pid_t pid;
     void *ptr;
-    struct shared_data *data;
+    data *data;
 
     // create shared memory
     shm_fd = shm_open("/myshm", O_CREAT | O_RDWR, 0666);
@@ -32,8 +22,11 @@ int main()
         perror("mmap");
         exit(EXIT_FAILURE);
     }
-    data = (struct shared_data *) ptr;
+    data = (data *) ptr;
     data->exit = 0;
+    data->start = 0;
+    data->stop = 0;
+
 
     // create child process
     pid = fork();
@@ -42,15 +35,32 @@ int main()
         exit(EXIT_FAILURE);
     } else if (pid == 0) {
         while (data->exit == 0) {
-            
+            if (data->start == 1) {
+                data->start = 0;
+                run_server(data);
+            }
         }
     }
 
     // parent process
-    printf("parent with pid %d is running\n", getpid());
-    wait(NULL);
-    printf("child with pid %d has terminated\n", pid);
-    printf("value in shared memory: %d\n", data->value);
+    char command[1024];
+    strcpy(command, "\0");
+    while (data->exit != 0) {
+        printf("(server) ");
+        fgets(command, 1024, stdin);
+        if (strcmp(command, "exit\n")) {
+            data->close = 1;
+            sleep(1);
+            if (data->exit == 1) {
+                exit(0);
+            }
+            else {
+                printf("Exit unsuccessful, please stop the server and manually end it if it fails again.")
+            }
+        }
+        input(data, command);
+        strcpy(command, "\0");
+    }
 
     // cleanup
     if (munmap(ptr, SHM_SIZE) == -1) {
