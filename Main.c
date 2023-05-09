@@ -51,7 +51,6 @@ int main()
     while (1) {
         printf("(server) ");
         fgets(command, 1024, stdin);
-        printf("%s", command);
         if (strcmp(command, "exit\n") == 0 && data->running == 0) {
             break;
         }
