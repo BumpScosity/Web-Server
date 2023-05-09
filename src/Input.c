@@ -5,6 +5,7 @@ int command(char input[1024], char output[]) {
     strcpy(c, output);
     strcat(c, "\n");
 
+    printf("%s", c);
     if (strcmp(input, output) == 0) {
         return 1;
     }
