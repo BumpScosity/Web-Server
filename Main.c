@@ -8,15 +8,18 @@ int main()
     struct data *data;
 
     // create shared memory
+    printf("1");
     shm_fd = shm_open("/myshm", O_CREAT | O_RDWR, 0666);
     if (shm_fd == -1) {
         perror("shm_open");
         exit(EXIT_FAILURE);
     }
+    printf("2");
     if (ftruncate(shm_fd, SHM_SIZE) == -1) {
         perror("ftruncate");
         exit(EXIT_FAILURE);
     }
+    printf("3");
     ptr = mmap(0, SHM_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
     if (ptr == MAP_FAILED) {
         perror("mmap");
@@ -29,11 +32,14 @@ int main()
 
 
     // create child process
+    printf("4");
     pid = fork();
     if (pid < 0) {
         printf("fork failed\n");
         exit(EXIT_FAILURE);
-    } else if (pid == 0) {
+    }
+    
+    else if (pid == 0) {
         while (data->exit == 0) {
             if (data->start == 1) {
                 data->start = 0;
