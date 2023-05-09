@@ -57,6 +57,7 @@ int main()
         printf("(server) ");
         fgets(command, 1024, stdin);
         if (strcmp(command, "exit\n")) {
+            printf("Exiting...");
             data->stop = 1;
             sleep(1);
             if (data->exit == 1) {
