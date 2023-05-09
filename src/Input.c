@@ -5,7 +5,7 @@ int command(char input[1024], char output[]) {
     strcpy(c, output);
     strcat(c, "\n");
 
-    if (strcmp(input, output)) {
+    if (strcmp(input, output) == 0) {
         return 1;
     }
     else {
