@@ -18,6 +18,7 @@ void input(struct data *data, char c[1024]) {
         /*SERVER*/
         // START
         if (command(c, "start") == 1) {
+            printf("1");
             start = 1;
             running = 1;
             break;
@@ -25,6 +26,7 @@ void input(struct data *data, char c[1024]) {
         // START
         // STOP
         else if(command(c, "stop") == 1) {
+            printf("2");
             stop = 1;
             running = 0;
             break;
