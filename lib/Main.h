@@ -15,11 +15,14 @@
 
 #define SHM_SIZE sizeof(data)
 
+#define start data->Start
+#define stop data->Stop
+#define running data->Running
+
 struct data {
-    int exit;
-    int start;
-    int stop;
-    int running;
+    int Start;
+    int Stop;
+    int Running;
 };
 
 void input(struct data *data, char command[1024]);

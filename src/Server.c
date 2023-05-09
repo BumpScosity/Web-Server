@@ -10,7 +10,7 @@ void run_server(struct data *data) {
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
     {
         perror("socket failed");
-        data->running = 0;
+        running = 0;
         exit(EXIT_FAILURE);
     }
 
@@ -21,14 +21,14 @@ void run_server(struct data *data) {
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
     {
         perror("bind failed");
-        data->running = 0;
+        running = 0;
         exit(EXIT_FAILURE);
     }
 
     if (listen(server_fd, 3) < 0)
     {
         perror("listen failed");
-        data->running = 0;
+        running = 0;
         exit(EXIT_FAILURE);
     }
 
@@ -40,9 +40,9 @@ void run_server(struct data *data) {
             exit(EXIT_FAILURE);
         }
 
-        if (data->stop == 1) {
-            data->stop = 0;
-            data->running = 0;
+        if (stop == 1) {
+            stop = 0;
+            start = 0;
             exit(0);
         }
 

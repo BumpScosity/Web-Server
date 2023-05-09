@@ -23,10 +23,9 @@ int main()
         exit(EXIT_FAILURE);
     }
     data = (struct data *) ptr;
-    data->exit = 0;
-    data->start = 0;
-    data->stop = 0;
-
+    start = 0;
+    stop = 0;
+    running = 0;
 
     // create child process
     pid = fork();
@@ -36,9 +35,9 @@ int main()
     }
     
     else if (pid == 0) {
-        while (data->exit == 0) {
-            if (data->start == 1) {
-                data->start = 0;
+        while (exit == 0) {
+            if (start == 1) {
+                start = 0;
                 run_server(data);
             }
         }
@@ -46,16 +45,14 @@ int main()
 
     // parent process
     char command[1024];
-    strcpy(command, "\0");
-    printf("data: %d", data->exit);
     while (1) {
         printf("(server) ");
         fgets(command, 1024, stdin);
-        if (strcmp(command, "exit\n") == 0 && data->running == 0) {
+        if (strcmp(command, "exit\n") == 0 && running == 0) {
             break;
         }
 
-        else if (strcmp(command, "exit\n") == 0 && data->running == 1) {
+        else if (strcmp(command, "exit\n") == 0 && running == 1) {
             printf("\nPlease stop the server before exiting.");
         }
 
