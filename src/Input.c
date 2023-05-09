@@ -11,4 +11,3 @@ void input(signals signal[3]) {
         }
     }
 }
-#include "lib/Main.h"
