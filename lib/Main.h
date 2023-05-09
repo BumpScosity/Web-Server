@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <time.h>
 #include <fcntl.h>
 #include <netinet/in.h>
 #include <unistd.h>
