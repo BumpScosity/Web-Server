@@ -6,12 +6,12 @@
 #include <string.h>
 #include <pthread.h>
 #include <sys/socket.h>
+#include <sys/mman.h>
 #include <netinet/in.h>
-#include <time.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
-#define SHM_SIZE sizeof(struct shared_data)
+#define SHM_SIZE sizeof(data)
 
 typedef struct {
     int exit;
