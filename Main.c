@@ -1,7 +1,8 @@
 #include "lib/Main.h"
 
 int main()
-{
+{   
+    int run = 1;
     int shm_fd;
     pid_t pid;
     void *ptr;
@@ -35,7 +36,7 @@ int main()
     }
     
     else if (pid == 0) {
-        while (exit == 0) {
+        while (run) {
             if (start == 1) {
                 start = 0;
                 run_server(data);
@@ -45,12 +46,12 @@ int main()
 
     // parent process
     char command[1024];
-    while (1) {
+    while (run) {
         printf("(server) ");
         fgets(command, 1024, stdin);
         command[strcspn(command, "\n")] = '\0';
         if (strcmp(command, "exit\n") == 0 && running == 0) {
-            break;
+            run = 0;
         }
 
         else if (strcmp(command, "exit\n") == 0 && running == 1) {
@@ -62,6 +63,8 @@ int main()
             strcpy(command, "\0");
         }
     }
+
+    kill(pid, SIGTERM);
 
     // cleanup
     if (munmap(ptr, SHM_SIZE) == -1) {
