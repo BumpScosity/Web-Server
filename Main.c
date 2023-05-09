@@ -64,8 +64,6 @@ int main()
         }
     }
 
-    kill(pid, SIGTERM);
-
     // cleanup
     if (munmap(ptr, SHM_SIZE) == -1) {
         perror("munmap");
