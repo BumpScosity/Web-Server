@@ -52,19 +52,18 @@ int main()
         printf("(server) ");
         fgets(command, 1024, stdin);
         printf("%s", command);
-        if (strcmp(command, "exit\n")) {
-            printf("Exiting...");
-            data->stop = 1;
-            sleep(1);
-            if (data->exit == 1) {
-                break;
-            }
-            else {
-                printf("Exit unsuccessful, please stop the server and manually end it if it fails again.");
-            }
+        if (strcmp(command, "exit\n") == 0 && data->running == 0) {
+            break;
         }
-        input(data, command);
-        strcpy(command, "\0");
+
+        else if (strcmp(command, "exit\n") == 0 && data->running == 1) {
+            printf("\nPlease stop the server before exiting.");
+        }
+
+        else {
+            input(data, command);
+            strcpy(command, "\0");
+        }
     }
 
     // cleanup
