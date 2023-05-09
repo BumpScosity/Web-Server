@@ -1,6 +1,6 @@
 #include "../lib/Main.h"
 
-void run_server(signals signal[3]) {
+void run_server(signals signal[3], settings setting[3]) {
     keys keylist[3];
     keylist[0].key = "123";
     keylist[1].key = "467";
