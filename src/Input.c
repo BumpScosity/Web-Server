@@ -1,30 +1,17 @@
 #include "../lib/Main.h"
 
-int command(char input[1024], char output[+1]) {
-    int size = sizeof(output);
-    output[size] = '\n';
-    if (strcmp(input, output) == 0) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-}
-
 void input(struct data *data, char c[1024]) {
     while(1) {
         /*SERVER*/
         // START
-        if (command(c, "start") == 1) {
-            printf("1");
+        if (strcmp(c, "start") == 0) {
             start = 1;
             running = 1;
             break;
         }
         // START
         // STOP
-        else if(command(c, "stop") == 1) {
-            printf("2");
+        else if(strcmp(c, "stop") == 0) {
             stop = 1;
             running = 0;
             break;
@@ -32,7 +19,7 @@ void input(struct data *data, char c[1024]) {
         // STOP
 
         // RESTART
-        else if (command(c, "restart") == 1) {
+        else if (strcmp(c, "restart") == 0) {
             if (running == 1) {
                 stop = 1;
                 sleep(1);
@@ -57,7 +44,6 @@ void input(struct data *data, char c[1024]) {
         // RESTART
 
         /*SERVER*/
-
         else {
             printf("Unknown command, use \"To get a list of commands\"");
             break;

@@ -48,6 +48,7 @@ int main()
     while (1) {
         printf("(server) ");
         fgets(command, 1024, stdin);
+        command[strcspn(command, "\n")] = '\0';
         if (strcmp(command, "exit\n") == 0 && running == 0) {
             break;
         }
