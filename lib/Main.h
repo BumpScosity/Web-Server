@@ -22,8 +22,8 @@ struct data {
     int running;
 };
 
-void input(data *data, char command[1024]);
-void run_server(data data);
+void input(struct data *data, char command[1024]);
+void run_server(struct data *data);
 
 
 #endif // MAIN_H
