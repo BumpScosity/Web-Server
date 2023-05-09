@@ -48,6 +48,8 @@ int main()
         }
     }
 
+    printf("5");
+
     // parent process
     char command[1024];
     strcpy(command, "\0");
