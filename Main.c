@@ -53,6 +53,7 @@ int main()
     // parent process
     char command[1024];
     strcpy(command, "\0");
+    printf("data: %d", data->exit);
     while (data->exit != 0) {
         printf("(server) ");
         fgets(command, 1024, stdin);
