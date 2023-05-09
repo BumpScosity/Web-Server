@@ -5,7 +5,7 @@ int main()
     int shm_fd;
     pid_t pid;
     void *ptr;
-    data *data;
+    struct data *data;
 
     // create shared memory
     shm_fd = shm_open("/myshm", O_CREAT | O_RDWR, 0666);
