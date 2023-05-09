@@ -1,4 +1,4 @@
-#include "lib/Main.h"
+#include "../lib/Main.h"
 
 void input(data *data, char command[1024]) {
     while(1) {
