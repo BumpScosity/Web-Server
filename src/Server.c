@@ -34,15 +34,16 @@ void run_server(struct data *data) {
 
     while (1)
     {   
+        if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
+        {
+            perror("accept failed");
+            exit(EXIT_FAILURE);
+        }
+
         if (data->stop == 1) {
             data->stop = 0;
             data->running = 0;
             exit(0);
-        }
-        else if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
-        {
-            perror("accept failed");
-            exit(EXIT_FAILURE);
         }
 
         valread = read(new_socket, buffer, 1024);
