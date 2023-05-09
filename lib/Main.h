@@ -15,12 +15,12 @@
 
 #define SHM_SIZE sizeof(data)
 
-typedef struct {
+struct data {
     int exit;
     int start;
     int stop;
     int running;
-} data;
+};
 
 void input(data *data, char command[1024]);
 void run_server(data data);
