@@ -22,7 +22,7 @@ int main()
         perror("mmap");
         exit(EXIT_FAILURE);
     }
-    data = (data *) ptr;
+    data = (struct data *) ptr;
     data->exit = 0;
     data->start = 0;
     data->stop = 0;
@@ -49,13 +49,13 @@ int main()
         printf("(server) ");
         fgets(command, 1024, stdin);
         if (strcmp(command, "exit\n")) {
-            data->close = 1;
+            data->stop = 1;
             sleep(1);
             if (data->exit == 1) {
                 exit(0);
             }
             else {
-                printf("Exit unsuccessful, please stop the server and manually end it if it fails again.")
+                printf("Exit unsuccessful, please stop the server and manually end it if it fails again.");
             }
         }
         input(data, command);
