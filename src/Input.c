@@ -1,7 +1,7 @@
 #include "../lib/Main.h"
 
-int command(char input[1024], char output[1024]) {
-    char c[1024];
+int command(char input[1024], char output[]) {
+    char c[sizeof(output+1)];
     strcpy(c, output);
     strcat(c, "\n");
 
