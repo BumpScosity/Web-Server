@@ -50,11 +50,11 @@ int main()
         printf("(server) ");
         fgets(command, 1024, stdin);
         command[strcspn(command, "\n")] = '\0';
-        if (strcmp(command, "exit\n") == 0 && running == 0) {
+        if (strcmp(command, "exit") == 0 && running == 0) {
             run = 0;
         }
 
-        else if (strcmp(command, "exit\n") == 0 && running == 1) {
+        else if (strcmp(command, "exit") == 0 && running == 1) {
             printf("\nPlease stop the server before exiting.");
         }
 
