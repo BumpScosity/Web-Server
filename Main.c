@@ -54,7 +54,7 @@ int main()
     char command[1024];
     strcpy(command, "\0");
     printf("data: %d", data->exit);
-    while (data->exit != 0) {
+    while (1) {
         printf("(server) ");
         fgets(command, 1024, stdin);
         if (strcmp(command, "exit\n")) {
@@ -62,7 +62,7 @@ int main()
             data->stop = 1;
             sleep(1);
             if (data->exit == 1) {
-                exit(0);
+                break;
             }
             else {
                 printf("Exit unsuccessful, please stop the server and manually end it if it fails again.");
