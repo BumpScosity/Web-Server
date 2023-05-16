@@ -35,11 +35,21 @@ void input(struct data *data, char c[1024]) {
         // LOG
         else if (strcmp(c, "log") == 0) {
             if (data->log == 0) {
-                printf("Logging is disabled");
+                printf("Logging is disabled\n");
             }
             else {
-                printf("Logging is enabled");
+                printf("Logging is enabled\n");
             }
+            break;
+        }
+
+        else if (strcmp(c, "log -b true") == 0) {
+            data->log = 1;
+            break;
+        }
+
+        else if (strcmp(c, "log -b false") == 0) {
+            data->log = 0;
             break;
         }
         // LOG

@@ -25,7 +25,7 @@ int main()
     }
     data = (struct data *) ptr;
     // Default presets
-    data->log = 0;
+    data->log = 1;
     data->buffer = 1024;
     data->port = 8080;
     start = 0;
