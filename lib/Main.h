@@ -30,6 +30,6 @@ struct data {
 
 void input(struct data *data, char command[1024]);
 void run_server(struct data *data);
-char* serve_file(int client_socket, const char *filename);
+void serve_file(int client_socket, const char *filename);
 
 #endif // MAIN_H
