@@ -24,11 +24,15 @@ int main()
         exit(EXIT_FAILURE);
     }
     data = (struct data *) ptr;
-    config(data, "default_config.conf");
+    // Default presets
+    data->log = 0;
+    data->buffer = 1024;
+    data->port = 8080;
     start = 0;
     stop = 0;
     running = 0;
     quit = 0;
+    config(data, "default_config.conf");
 
     // create child process
     pid = fork();

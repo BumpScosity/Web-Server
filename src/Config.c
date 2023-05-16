@@ -7,6 +7,8 @@ void config(struct data *data, const char *filename)
 
     const char *pattern1 = "port:";
     const char *pattern2 = "buffer:";
+    const char *pattern3 = "log: false";
+    const char *pattern4 = "log: true";
 
     snprintf(path, sizeof(path), "config/%s", filename); // Assuming 'public' is the child directory
 
@@ -25,6 +27,14 @@ void config(struct data *data, const char *filename)
         else if (strncmp(line, pattern2, strlen(pattern2)) == 0) {
             result = atol(line);
             data->buffer = result;
+            continue;
+        }
+        else if (strcmp(line, pattern3) == 0) {
+            data->log = 0;
+            continue;
+        }
+        else if (strcmp(line, pattern4) == 0) {
+            data->log = 1;
             continue;
         }
         break;
