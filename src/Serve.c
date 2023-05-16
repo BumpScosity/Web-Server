@@ -1,7 +1,10 @@
 #include "../lib/Main.h"
 
-char* serve_file(int client_socket, const char *filename) {
-    FILE *file = fopen(filename, "r");
+void send_html(int client_socket, const char *filename) {
+    char path[256];
+    snprintf(path, sizeof(path), "HTML/%s", filename); // Assuming 'public' is the child directory
+
+    FILE *file = fopen(path, "r");
     if (file == NULL) {
         perror("File opening failed");
         exit(EXIT_FAILURE);
