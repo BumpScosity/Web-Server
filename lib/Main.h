@@ -19,11 +19,13 @@
 #define start data->Start
 #define stop data->Stop
 #define running data->Running
+#define quit data->Quit
 
 struct data {
     int Start;
     int Stop;
     int Running;
+    int Quit;
 };
 
 void input(struct data *data, char command[1024]);

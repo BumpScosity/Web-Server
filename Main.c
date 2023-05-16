@@ -27,6 +27,7 @@ int main()
     start = 0;
     stop = 0;
     running = 0;
+    quit = 0;
 
     // create child process
     pid = fork();
@@ -55,7 +56,7 @@ int main()
         }
 
         else if (strcmp(command, "exit") == 0 && running == 1) {
-            printf("\nPlease stop the server before exiting.");
+            printf("\nPlease stop the server before exiting...\n");
         }
 
         else {
