@@ -24,6 +24,7 @@ int main()
         exit(EXIT_FAILURE);
     }
     data = (struct data *) ptr;
+    config(data, "default_config.conf");
     start = 0;
     stop = 0;
     running = 0;

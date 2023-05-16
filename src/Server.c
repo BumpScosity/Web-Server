@@ -46,10 +46,11 @@ void run_server(struct data *data) {
         }
 
         valread = read(new_socket, buffer, 1024);
-        printf("%s\n", buffer);
+        if (data->log == 1) {
+            printf("%s\n", buffer);
+        }
 
         serve_file(new_socket, "../HTML/index.html");
-        printf("File served\n");
 
         close(new_socket);
     }

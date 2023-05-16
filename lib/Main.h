@@ -22,14 +22,21 @@
 #define quit data->Quit
 
 struct data {
+    // Signals
     int Start;
     int Stop;
     int Running;
     int Quit;
+
+    // Config
+    int log;
+    int port;
+    int buffer;
 };
 
 void input(struct data *data, char command[1024]);
 void run_server(struct data *data);
 char *serve_file(int client_socket, const char *filename);
+void config(struct data *data, const char *filename);
 
 #endif // MAIN_H
