@@ -5,12 +5,12 @@ void input(struct data *data, char c[1024]) {
         /*GENERAL*/
         // HELP
         if (strcmp(c, "help") == 0) {
-            printf("help: Provides a list of commands");
-            printf("start: Starts the server");
-            printf("stop: Stops the server");
-            printf("log: Shows if logging is disabled or enabled");
-            printf("log -b true: Enables logging");
-            printf("log -b false: Disables logging");
+            printf("help: Provides a list of commands\n");
+            printf("start: Starts the server\n");
+            printf("stop: Stops the server\n");
+            printf("log: Shows if logging is disabled or enabled\n");
+            printf("log -b true: Enables logging\n");
+            printf("log -b false: Disables logging\n");
             break;
         }
         // HELP
