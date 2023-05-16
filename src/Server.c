@@ -5,7 +5,6 @@ void run_server(struct data *data) {
     struct sockaddr_in address;
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
-    char *hello = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Hello, World!</h1></body></html>";
 
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
     {
@@ -49,8 +48,8 @@ void run_server(struct data *data) {
         valread = read(new_socket, buffer, 1024);
         printf("%s\n", buffer);
 
-        write(new_socket, hello, strlen(hello));
-        printf("Hello message sent\n");
+        serve_file(new_socket, "../HTML/index.html");
+        printf("File served\n");
 
         close(new_socket);
     }

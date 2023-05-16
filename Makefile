@@ -7,8 +7,9 @@ OBJ = obj
 program: $(OBJS)
 	$(CC) $(FLAGS) -c $(SRC)/Input.c -o $(OBJ)/Input.o
 	$(CC) $(FLAGS) -c $(SRC)/Server.c -o $(OBJ)/Server.o
+	$(CC) $(FLAGS) -c $(SRC)/Serve.c -o $(OBJ)/Serve.o
 	$(CC) $(FALGS) -c Main.c -o $(OBJ)/Main.o
-	$(CC) $(FLAGS) -o Main $(OBJ)/Main.o $(OBJ)/Input.o $(OBJ)/Server.o
+	$(CC) $(FLAGS) -o Main $(OBJ)/Main.o $(OBJ)/Input.o $(OBJ)/Server.o $(OBJ)/Serve.o
 
 clean:
-	rm -f Main $(OBJ)/Main.o $(OBJ)/Input.o $(OBJ)/Server.o
+	rm -f Main $(OBJ)/Main.o $(OBJ)/Input.o $(OBJ)/Server.o $(OBJ)/Serve.o
