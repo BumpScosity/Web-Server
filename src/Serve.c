@@ -2,7 +2,7 @@
 
 char *serve_file(int client_socket, const char *filename) {
     char path[256];
-    snprintf(path, sizeof(path), "public/%s", filename); // Assuming 'public' is the child directory
+    snprintf(path, sizeof(path), "HTML/%s", filename); // Assuming 'public' is the child directory
 
     FILE *file = fopen(path, "r");
     if (file == NULL) {
