@@ -11,6 +11,7 @@ void input(struct data *data, char c[1024]) {
             printf("log: Shows if logging is disabled or enabled");
             printf("log -b true: Enables logging");
             printf("log -b false: Disables logging");
+            break;
         }
         // HELP
         /*GENERAL*/
@@ -36,6 +37,10 @@ void input(struct data *data, char c[1024]) {
             if (data->log == 0) {
                 printf("Logging is disabled");
             }
+            else {
+                printf("Logging is enabled");
+            }
+            break;
         }
         // LOG
         /*SERVER*/
