@@ -2,7 +2,6 @@
 
 int main()
 {   
-    int run = 1;
     int shm_fd;
     pid_t pid;
     void *ptr;
@@ -25,9 +24,10 @@ int main()
     }
     data = (struct data *) ptr;
     // Default presets
-    data->log = 1;
+    data->log = 0;
     data->buffer = 1024;
     data->port = 8080;
+    data->run = 1;
     start = 0;
     stop = 0;
     running = 0;
@@ -42,7 +42,7 @@ int main()
     }
     
     else if (pid == 0) {
-        while (run) {
+        while (data->run) {
             if (start == 1) {
                 start = 0;
                 run_server(data);
@@ -52,12 +52,12 @@ int main()
 
     // parent process
     char command[1024];
-    while (run) {
+    while (data->run) {
         printf("(server) ");
         fgets(command, 1024, stdin);
         command[strcspn(command, "\n")] = '\0';
         if (strcmp(command, "exit") == 0 && running == 0) {
-            run = 0;
+            data->run = 0;
         }
 
         else if (strcmp(command, "exit") == 0 && running == 1) {

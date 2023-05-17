@@ -29,6 +29,7 @@ struct data {
     int Quit;
 
     // Config
+    int run;
     int log;
     int port;
     int buffer;

@@ -7,7 +7,8 @@ void run_server(struct data *data) {
     char buffer[1024] = {0};
 
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
-    {
+    {   
+        printf("\nServer error: ");
         perror("socket failed");
         running = 0;
         exit(EXIT_FAILURE);
@@ -18,7 +19,8 @@ void run_server(struct data *data) {
     address.sin_port = htons(8080);
 
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
-    {
+    {   
+        printf("\nServer error: ");
         perror("bind failed");
         running = 0;
         exit(EXIT_FAILURE);
@@ -26,6 +28,7 @@ void run_server(struct data *data) {
 
     if (listen(server_fd, 3) < 0)
     {
+        printf("\nServer error: ");
         perror("listen failed");
         running = 0;
         exit(EXIT_FAILURE);
@@ -34,8 +37,10 @@ void run_server(struct data *data) {
     while (1)
     {   
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
-        {
+        {   
+            printf("\nServer error: ");
             perror("accept failed");
+            running = 0;
             exit(EXIT_FAILURE);
         }
 
