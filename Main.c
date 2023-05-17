@@ -58,6 +58,7 @@ int main()
         command[strcspn(command, "\n")] = '\0';
         if (strcmp(command, "exit") == 0 && running == 0) {
             data->run = 0;
+            kill(SIGTERM, pid);
         }
 
         else if (strcmp(command, "exit") == 0 && running == 1) {
