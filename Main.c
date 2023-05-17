@@ -47,10 +47,11 @@ int main()
                 start = 0;
                 run_server(data);
             }
+            if (quit == 1) {
+                kill(SIGTERM, getpid());
+            }
         }
-        if (quit == 1) {
-            kill(SIGTERM, getpid());
-        }
+        exit(EXIT_SUCCESS); 
     }
 
     // parent process
