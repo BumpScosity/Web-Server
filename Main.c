@@ -58,7 +58,9 @@ int main()
         fgets(command, 1024, stdin);
         command[strcspn(command, "\n")] = '\0';
         if (strcmp(command, "exit") == 0 && running == 0) {
+            kill(pid, SIGINT); // send SIGINT signal to child process
             data->run = 0;
+            kill(pid, SIGINT); // send SIGINT signal to child process
         }
 
         else if (strcmp(command, "exit") == 0 && running == 1) {
