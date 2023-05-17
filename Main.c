@@ -48,6 +48,9 @@ int main()
                 run_server(data);
             }
         }
+        if (quit == 1) {
+            kill(SIGTERM, getpid());
+        }
     }
 
     // parent process
@@ -57,8 +60,8 @@ int main()
         fgets(command, 1024, stdin);
         command[strcspn(command, "\n")] = '\0';
         if (strcmp(command, "exit") == 0 && running == 0) {
+            quit = 1;
             data->run = 0;
-            kill(SIGTERM, pid);
         }
 
         else if (strcmp(command, "exit") == 0 && running == 1) {
