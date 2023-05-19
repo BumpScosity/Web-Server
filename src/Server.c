@@ -64,9 +64,7 @@ void run_server(struct data *data) {
                 }
             }
         }
-
-        free(method);
-        free(url);
+        
         close(new_socket);
     }
 }
