@@ -1,2 +1,2 @@
 # Web-Server
-A Web-Server made in C, because why not.
+Made it because bored
