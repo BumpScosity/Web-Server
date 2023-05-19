@@ -24,7 +24,7 @@ void run_server(struct data *data) {
         perror("bind failed");
         running = 0;
         exit(EXIT_FAILURE);
-    }
+    }   
 
     if (listen(server_fd, 3) < 0)
     {
@@ -54,9 +54,19 @@ void run_server(struct data *data) {
         if (data->log == 1) {
             printf("%s\n", buffer);
         }
+        char *method = strtok(buffer, " ");
+        char *url = strtok(buffer, " ");
 
-        serve_file(new_socket, "../HTML/index.html");
+        if (method != NULL && url != NULL) {
+            if (strcmp(method, "GET") == 0) {
+                if (strcmp(url, "/test") == 0) {
+                    serve_file(new_socket, "../HTML/index.html");
+                }
+            }
+        }
 
+        free(method);
+        free(url);
         close(new_socket);
     }
 }

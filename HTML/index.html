@@ -28,24 +28,25 @@
 
   <script>
     function sendmsg() {
-      const inputBox = document.getElementById("message-input");
-      const message = inputBox.value;
-      
-      inputBox.value = "Sent!"
-      fetch('/test', {
-        method: 'POST',
+      const URL = window.location.href;
+      const url = URL + "/test"; // Replace with your server endpoint
+      const data = "This is the data you want to send";
+
+      fetch(url, {
+        method: "POST",
         headers: {
-          'Content-Type': 'text/plain'
+          "Content-Type": "text/plain",
         },
-        body: message
+        body: data,
       })
-        .then(response => {
-          console.log('Server response:', response);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      inputBox.value = message;
+      .then((response) => response.text())
+      .then((responseText) => {
+        console.log("Server response:", responseText);
+        // Process the response from the server
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
     }
 
     function sendkey1() {
